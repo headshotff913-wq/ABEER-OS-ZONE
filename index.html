@@ -18,32 +18,27 @@
     </style>
 </head>
 <body>
-
     <header>
         <div style="background:#00ffcc; color:#000; display:inline-block; padding:5px 10px; font-weight:bold; border-radius:20px;">MADE BY ABEER</div>
         <h1>Welcome to <span>Abeer Tech OS Pro</span></h1>
         <p>Premium Android ISOs & Tools for Laptops (Tested on Dell Latitude E5540)</p>
     </header>
-
     <div class="card">
         <h3>Bliss OS 14 (Android 11)</h3>
         <p>Best for Dell Latitude E5540. Smooth UI & Gaming.</p>
-        <button class="btn" onclick="alert('ISO Link Comming Soon!')">Download ISO</button>
+        <button class="btn" onclick="alert('ISO Link Coming Soon!')">Download ISO</button>
     </div>
-
     <div class="card">
         <h3>Password Generator</h3>
         <button class="btn" onclick="generatePassword()">Generate Secure Password</button>
         <div class="result-box" id="passResult">Click button above...</div>
     </div>
-
     <div class="card">
         <h3>QR Code Generator</h3>
         <input type="text" id="qrText" placeholder="Paste link or text here...">
         <button class="btn" onclick="makeQR()">Create QR Code</button>
         <div id="qrcode"></div>
     </div>
-
     <script>
         function generatePassword() {
             const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$";
