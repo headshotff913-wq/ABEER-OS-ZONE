@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abeer Tech OS Pro | Premium Suite</title>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- QR Code Library CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0d0d0d;
+            --bg-card: #141414;
+            --accent-cyan: #00ffcc;
+            --accent-glow: rgba(0, 255, 204, 0.3);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --border-color: #222222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* Top Header & Branding */
+        header {
+            background: linear-gradient(180deg, #111111 0%, var(--bg-primary) 100%);
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 2px solid var(--accent-cyan);
+            position: relative;
+        }
+
+        .dev-badge {
+            background-color: var(--accent-cyan);
+            color: #000000;
+            padding: 6px 16px;
+            font-weight: 800;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+        }
+
+        header h1 span {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+        }
+
+        .site-description {
+            max-width: 750px;
+            margin: 15px auto 0 auto;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Container & Tabs */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            margin: 40px 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent-cyan);
+        }
+
+        /* Grid Framework */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* Premium Card GUI */
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 255, 204, 0.08);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        /* Input Elements */
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-secondary);
+            border: 1px solid #333333;
+            color: var(--text-main);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 5px rgba(0, 255, 204, 0.2);
+        }
+
+        /* Interactive Buttons */
+        .btn {
+            background-color: var(--accent-cyan);
+            color: #000000;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background-color: #00ccaa;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+        }
+
+        /* Output Screens */
+        .result-box {
+            background-color: var(--bg-secondary);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            word-break: break-all;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #444444;
+            color: var(--accent-cyan);
+            min-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Fixed QR Output Container */
+        .qr-output-wrapper {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 12px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .qr-output-wrapper img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #555555;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+            font-size: 0.9rem;
+        }
+
+        /* Custom Utility Controls styling */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .checkbox-container input {
+            width: auto;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="dev-badge">Platform Crafted by Abeer</div>
+        <h1>Welcome to <span>Abeer Tech OS Pro</span></h1>
+        <p class="site-description">
+            A premium, high-performance dark suite featuring hand-tested Android desktop operating systems optimized for standard hardware, layered with structural modern micro-utilities.
+        </p>
+    </header>
+
+    <div class="container">
+        
+        <!-- SECTION 1: OS DIRECTORY -->
+        <div class="section-title">
+            <i class="fa-solid fa-layer-group"></i>
+            <h2>Verified Android Operating Systems</h2>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-brands fa-android"></i></div>
+                    <h3>Bliss OS 14 (Android 11)</h3>
+                    <p>Optimized explicitly for architectures like Dell Latitude E5540 and modern Intel processors. Provides smooth daily workflow setups and balanced battery standby.</p>
+                </div>
+                <button class="btn" onclick="alert('Download Link Setup Pending Configuration')"><i class="fa-solid fa-download"></i> Get ISO</button>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <h3>Prime OS (Classic Build)</h3>
+                    <p>Engineered for legacy setups running 2GB to 4GB RAM configurations. Features pre-integrated performance engines and comprehensive system configurations.</p>
+                </div>
+                <button class="btn" onclick="alert('Download Link Setup Pending Configuration')"><i class="fa-solid fa-download"></i> Get ISO</button>
+            </div>
+        </div>
+
+        <!-- SECTION 2: UTILITIES SUITE (15 FEATURES) -->
+        <div class="section-title">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            <h2>Advanced Web Utilities Engine</h2>
+        </div>
+        <div class="grid">
+            
+            <!-- FEATURE 1: Fixed QR Generator -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-qrcode"></i></div>
+                    <h3>QR Code Engine</h3>
+                    <p>Generate clean vector QR matrices instantly from strings or raw links.</p>
+                    <input type="text" id="qrInputData" placeholder="Enter target URL or text payload...">
+                </div>
+                <div>
+                    <button class="btn" onclick="executeQR()"><i class="fa-solid fa-gear"></i> Generate QR</button>
+                    <div class="qr-output-wrapper" id="qrWrapperNode">
+                        <div id="qrCanvasNode"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEATURE 2: Advanced Password Generator -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-key"></i></div>
+                    <h3>Password Architect</h3>
+                    <p>Generate robust cryptographic strings configuration schemas instantly.</p>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="passSymbols" checked> Include Symbols (!@#$)
+                    </div>
+                </div>
+                <div>
+                    <button class="btn" onclick="executePassword()"><i class="fa-solid fa-bolt"></i> Construct</button>
+                    <div class="result-box" id="passResultView">Waiting...</div>
+                </div>
+            </div>
+
+            <!-- FEATURE 3: Word & Character Counter -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-font"></i></div>
+                    <h3>Text Matrix Analyzer</h3>
+                    <p>Analyze parameters of input dynamic string arrays dynamically.</p>
+                    <input type="text" id="textAnalyzerInput" oninput="analyzeText()" placeholder="Type string array context...">
+                </div>
+                <div class="result-box" id="textAnalyzerView">Chars: 0 | Words: 0</div>
+            </div>
+
+            <!-- FEATURE 4: Case Converter -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-text-height"></i></div>
+                    <h3>Text Case Modifier</h3>
+                    <p>Transform text structures into standard upper or lower configurations.</p>
+                    <input type="text" id="caseInputData" placeholder="Enter text payload...">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn" onclick="modifyCase('up')">Upper</button>
+                    <button class="btn" onclick="modifyCase('low')">Lower</button>
+                </div>
+            </div>
+
+            <!-- FEATURE 5: Advanced Base64 Encryptor/Decryptor -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Base64 Crypt Engine</h3>
+                    <p>Encode or decode safe transport data representations seamlessly.</p>
+                    <input type="text" id="base64Input" placeholder="Enter target text string...">
+                </div>
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <button class="btn" onclick="processBase64('encode')">Encode</button>
+                    <button class="btn" onclick="processBase64('decode')">Decode</button>
+                </div>
+                <div class="result-box" id="base64View">Output Channel</div>
+            </div>
+
+            <!-- FEATURE 6: Binary Converter -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-binary"></i></div>
+                    <h3>Text-to-Binary Engine</h3>
+                    <p>Convert alphabetic text arrays directly into raw binary byte matrices.</p>
+                    <input type="text" id="binaryInput" oninput="convertBinary()" placeholder="Enter string array...">
+                </div>
+                <div class="result-box" id="binaryView" style="font-size: 0.85rem; max-height: 80px; overflow-y: auto;">01000001</div>
+            </div>
+
+            <!-- FEATURE 7: Capitalize Words -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-heading"></i></div>
+                    <h3>Title Case Tool</h3>
+                    <p>Automatically capitalize the first letter of every word payload array.</p>
+                    <input type="text" id="titleCaseInput" placeholder="enter text payload here...">
+                </div>
+                <div>
+                    <button class="btn" onclick="executeTitleCase()">Format Text</button>
+                    <div class="result-box" id="titleCaseView">Formatted View</div>
+                </div>
+            </div>
+
+            <!-- FEATURE 8: Trim Whitespace -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-scissors"></i></div>
+                    <h3>Space Optimizer</h3>
+                    <p>Instantly strip unnecessary padding and inner space structures from text arrays.</p>
+                    <input type="text" id="trimInput" placeholder="Text   with    excessive   spaces...">
+                </div>
+                <div>
+                    <button class="btn" onclick="executeTrim()">Optimize Space</button>
+                    <div class="result-box" id="trimView">Clean Output</div>
+                </div>
+            </div>
+
+            <!-- FEATURE 9: Direct URL Encoder/Decoder -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-link"></i></div>
+                    <h3>URL Codec System</h3>
+                    <p>Safely encode characters for query parameter transfer configurations.</p>
+                    <input type="text" id="urlCodecInput" placeholder="Enter web URL matrix...">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn" onclick="processURLCodec('encode')">Encode</button>
+                    <button class="btn" onclick="processURLCodec('decode')">Decode</button>
+                </div>
+                <div class="result-box" id="urlCodecView">Result View</div>
+            </div>
+
+            <!-- FEATURE 10: MD5 Hashing Mock Engine -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-fingerprint"></i></div>
+                    <h3>Mock MD5 Hasher</h3>
+                    <p>Generate non-reversible identity checksum data visualizations instantly.</p>
+                    <input type="text" id="hashInput" placeholder="Enter value payload...">
+                </div>
+                <div>
+                    <button class="btn" onclick="executeMockHash()">Compute Hash</button>
+                    <div class="result-box" id="hashView">Checksum Signature</div>
+                </div>
+            </div>
+
+            <!-- FEATURE 11: Reverse Text Engine -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-arrow-left-right"></i></div>
+                    <h3>Text Inverter</h3>
+                    <p>Instantly flip character positional sequences inside raw data strings.</p>
+                    <input type="text" id="reverseInput" oninput="executeReverse()" placeholder="Enter forward matrix...">
+                </div>
+                <div class="result-box" id="reverseView">xirtam drawrof retnE</div>
+            </div>
+
+            <!-- FEATURE 12: Random Number Generator -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-dice"></i></div>
+                    <h3>Stochastic Generator</h3>
+                    <p>Produce random integers inside specified custom range intervals.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="numMin" value="1" placeholder="Min">
+                        <input type="number" id="numMax" value="100" placeholder="Max">
+                    </div>
+                </div>
+                <div>
+                    <button class="btn" onclick="executeRandomNum()">Generate Integer</button>
+                    <div class="result-box" id="randomNumView">Result: --</div>
+                </div>
+            </div>
+
+            <!-- FEATURE 13: Hex to RGB Converter -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
+                    <h3>Color Code Converter</h3>
+                    <p>Translate hexadecimal web color notation into functional RGB values.</p>
+                    <input type="text" id="hexColorInput" value="#00ffcc" placeholder="#ffffff">
+                </div>
+                <div>
+                    <button class="btn" onclick="executeColorConvert()">Convert Space</button>
+                    <div class="result-box" id="colorConvertView">rgb(0, 255, 204)</div>
+                </div>
+            </div>
+
+            <!-- FEATURE 14: Epoch Time Viewer -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-clock"></i></div>
+                    <h3>System Epoch Tracker</h3>
+                    <p>Fetch real-time numerical UNIX timestamp arrays calculated dynamically.</p>
+                </div>
+                <div>
+                    <button class="btn" onclick="updateEpoch()">Fetch Timestamp</button>
+                    <div class="result-box" id="epochView">Click Fetch...</div>
+                </div>
+            </div>
+
+            <!-- FEATURE 15: Clean JSON Validator -->
+            <div class="card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                    <h3>JSON Object Auditor</h3>
+                    <p>Verify syntactic structure integrity of standard JSON objects instantly.</p>
+                    <input type="text" id="jsonInput" placeholder='{"status": "active"}'>
+                </div>
+                <div>
+                    <button class="btn" onclick="executeJSONAudit()">Audit Object</button>
+                    <div class="result-box" id="jsonAuditView">Audit Standby</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Abeer Tech OS Pro. All Structural Code Architectures Engineered by Abeer. Open-Source Licensing Protocols Activated.
+    </footer>
+
+    <!-- Comprehensive Architecture Core Engine Logic Script Configuration -->
+    <script>
+        // 1. QR Code Core Implementation Fix
+        function executeQR() {
+            var rawPayload = document.getElementById("qrInputData").value;
+            var displayContainer = document.getElementById("qrWrapperNode");
+            var canvasNode = document.getElementById("qrCanvasNode");
+            
+            if (!rawPayload.trim()) {
+                alert("Target payload cannot be blank. Enter a string or target structural link framework.");
+                return;
+            }
+            
+            canvasNode.innerHTML = "";
+            displayContainer.style.display = "flex";
+            
+            try {
+                new QRCode(canvasNode, {
+                    text: rawPayload,
+                    width: 140,
+                    height: 140,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            } catch(err) {
+                alert("QR Generation Framework Error: Check structural system libraries.");
+            }
+        }
+
+        // 2. Cryptographic Password Architect Engine
+        function executePassword() {
+            var alphabeticBase = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var structuralSymbols = "!@#$%^&*()_+=-[]{}|;:,.<>?";
+            var compositeMatrix = alphabeticBase;
+            
+            if (document.getElementById("passSymbols").checked) {
+                compositeMatrix += structuralSymbols;
+            }
+            
+            var temporaryString = "";
+            for (var index = 0; index < 16; index++) {
+                var coordinate = Math.floor(Math.random() * compositeMatrix.length);
+                temporaryString += compositeMatrix.charAt(coordinate);
+            }
+            document.getElementById("passResultView").innerText = temporaryString;
+        }
+
+        // 3. Dynamic Text Analyzer Function
+        function analyzeText() {
+            var inputData = document.getElementById("textAnalyzerInput").value;
+            var characterLength = inputData.length;
+            var tokenWords = inputData.trim().split(/\s+/).filter(function(item) { return item.length > 0; }).length;
+            document.getElementById("textAnalyzerView").innerText = "Chars: " + characterLength + " | Words: " + tokenWords;
+        }
+
+        // 4. Text Case Modifier Processor
+        function modifyCase(operationMode) {
+            var targetPayload = document.getElementById("caseInputData").value;
+            if(operationMode === 'up') {
+                document.getElementById("caseInputData").value = targetPayload.toUpperCase();
+            } else {
+                document.getElementById("caseInputData").value = targetPayload.toLowerCase();
+            }
+        }
+
+        // 5. Base64 Core Processing Logic
+        function processBase64(operationType) {
+            var inputString = document.getElementById("base64Input").value;
+            var viewNode = document.getElementById("base64View");
+            if(!inputString.trim()) { viewNode.innerText = "Empty Data String"; return; }
+            try {
+                if(operationType === 'encode') {
+                    viewNode.innerText = btoa(inputString);
+                } else {
+                    viewNode.innerText = atob(inputString);
+                }
+            } catch(e) {
+                viewNode.innerText = "Invalid Base64 Data Format Matrix";
+            }
+        }
+
+        // 6. Text to Binary Transformation Matrix
+        function convertBinary() {
+            var sourceText = document.getElementById("binaryInput").value;
+            var targetView = document.getElementById("binaryView");
+            var accumulation = "";
+            for (var i = 0; i < sourceText.length; i++) {
+                var binString = sourceText[i].charCodeAt(0).toString(2);
+                accumulation += ("00000000" + binString).slice(-8) + " ";
+            }
+            targetView.innerText = accumulation.trim() || "01000001";
+        }
+
+        // 7. Title Case Formatting
+        function executeTitleCase() {
+            var rawText = document.getElementById("titleCaseInput").value;
+            var formatted = rawText.replace(/\b\w/g, function(char) { return char.toUpperCase(); });
+            document.getElementById("titleCaseView").innerText = formatted || "Formatted View";
+        }
+
+        // 8. Whitespace Optimization System
+        function executeTrim() {
+            var rawString = document.getElementById("trimInput").value;
+            var cleanString = rawString.trim().replace(/\s+/g, ' ');
+            document.getElementById("trimView").innerText = cleanString || "Clean Output";
+        }
+
+        // 9. URL Param Codec System
+        function processURLCodec(mode) {
+            var currentVal = document.getElementById("urlCodecInput").value;
+            var renderNode = document.getElementById("urlCodecView");
+            try {
+                if(mode === 'encode') {
+                    renderNode.innerText = encodeURIComponent(currentVal);
+                } else {
+                    renderNode.innerText = decodeURIComponent(currentVal);
+                }
+            } catch(err) {
+                renderNode.innerText = "Encoding Fault Matrix Event";
+            }
+        }
+
+        // 10. MD5 Mock Checksum Visualizer Engine
+        function executeMockHash() {
+            var inputVal = document.getElementById("hashInput").value;
+            if(!inputVal) { document.getElementById("hashView").innerText = "Blank Value Field"; return; }
+            var pseudoAccumulator = 0;
+            for (var i = 0; i < inputVal.length; i++) {
+                pseudoAccumulator += inputVal.charCodeAt(i);
+            }
+            var hexSignature = (pseudoAccumulator * 891393).toString(16).padEnd(32, 'a');
+            document.getElementById("hashView").innerText = hexSignature.substring(0, 32);
+        }
+
+        // 11. String Character Inverter Matrix
+        function executeReverse() {
+            var inputStr = document.getElementById("reverseInput").value;
+            var reverseStr = inputStr.split("").reverse().join("");
+            document.getElementById("reverseView").innerText = reverseStr || "Output Inversion";
+        }
+
+        // 12. Stochastic Bounds Calculator Engine
+        function executeRandomNum() {
+            var minLimit = parseInt(document.getElementById("numMin").value) || 0;
+            var maxLimit = parseInt(document.getElementById("numMax").value) || 100;
+            if (minLimit >= maxLimit) {
+                alert("Minimum value configuration upper bounds violation.");
+                return;
+            }
+            var generatedInt = Math.floor(Math.random() * (maxLimit - minLimit + 1)) + minLimit;
+            document.getElementById("randomNumView").innerText = "Result: " + generatedInt;
+        }
+
+        // 13. Color Vector Space Transformation
+        function executeColorConvert() {
+            var hex = document.getElementById("hexColorInput").value.trim();
+            var viewer = document.getElementById("colorConvertView");
+            if(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.test(hex)) {
+                var match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                var r = parseInt(match[1], 16);
+                var g = parseInt(match[2], 16);
+                var b = parseInt(match[3], 16);
+                viewer.innerText = "rgb(" + r + ", " + g + ", " + b + ")";
+            } else {
+                viewer.innerText = "Invalid Hex Key Matrix";
+            }
+        }
+
+        // 14. Real-time Epoch System Counter
+        function updateEpoch() {
+            var rawTimestamp = Math.floor(Date.now() / 1000);
+            document.getElementById("epochView").innerText = "UNIX: " + rawTimestamp;
+        }
+
+        // 15. JSON Text Structure Integrity Audit
+        function executeJSONAudit() {
+            var jsonStringPayload = document.getElementById("jsonInput").value;
+            var viewerContainer = document.getElementById("jsonAuditView");
+            try {
+                JSON.parse(jsonStringPayload);
+                viewerContainer.innerText = "✓ Valid Structure Matrix JSON";
+                viewerContainer.style.color = "#00ffcc";
+            } catch(e) {
+                viewerContainer.innerText = "✗ Syntax Error Structure Fault";
+                viewerContainer.style.color = "#ff3333";
+            }
+        }
+    </script>
+</body>
+</html>
